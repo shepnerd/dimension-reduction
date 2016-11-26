@@ -7,12 +7,7 @@ function [ ret ] = mds( data, dimension )
 n = size(data,2);
 
 % distance matrix
-D = zeros(n, n);
-for i = 1 : n
-    residual = bsxfun(@minus, data(:,i:n), data(:,i));
-    D(i,i:n) = sum(residual.^2);
-end
-D = D + D';
+D = createDistanceMatrix( data );
 di_ = sum(D,2) / n;
 d_j = sum(D,1) / n;
 d__ = sum(sum(D))/ n / n;
